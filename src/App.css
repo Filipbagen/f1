@@ -1,3 +1,5 @@
 body {background-color: white;}
 
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.rowC{display:flex; flex-direction:row;}

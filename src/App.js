@@ -9,7 +9,7 @@ import './App.css';
 import Steering from './Steering'
 
 const Hej = styled.h1`
-  font-size: 75px;
+  font-size: 100px;
   padding: 50px; 
   margin: auto;
   text-align: center;
@@ -19,11 +19,21 @@ const Hej = styled.h1`
 `
 
 const Text = styled.p`
-font-size: 20px;
+font-size: 18px;
 margin: auto;
 padding: 50px;
-font-weight: 300;
+font-weight: 10;
 color: black;
+font-family: 'Bebas Neue', cursive;
+`
+
+const Text2 = styled.p`
+font-size: 18px;
+margin: auto;
+padding: 80px;
+font-weight: 10;
+color: black;
+font-family: 'Bebas Neue', cursive;
 `
 
 
@@ -74,37 +84,40 @@ function FillLight({ brightness, color }) {
 
 export default function App() {
   return (
-    <div>
 
-
-
-      <Hej>STEERING WHEEL</Hej>
-
-      <Canvas style={{margin: '0 auto', height: "55vh", width: "75vw" }} camera={{fov: 75, near: 0.1, far: 1000, position: [0, 0, 10]}} shadowMap >
-
-      <color attach="background" args={['alpha']} />
-    
-      <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
-
-        <KeyLight brightness={50} color={"#ffc9f9"} /> 
-        <FillLight brightness={50} color={"white"} />
-      
-       <Suspense fallback={null}>
-
-       <Rig>
-         <Steering 
-         metalness={10}
-         />
-       </Rig>
-
-     </Suspense>
-    
-  </Canvas>
+  <><><div><Hej>STEERING WHEEL</Hej> </div><div className='rowC'>
 
       <Text>
-        Information om ratten, 
+        A F1 steering wheel can cost about $40,000 to $100,000. However, it could be more than $100,000 million depending on the level of sophistication.
       </Text>
 
-  </div>
+      <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
+
+        <color attach="background" args={['white']} />
+
+        <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
+
+        <KeyLight brightness={50} color={"white"} />
+        <FillLight brightness={50} color={"white"} />
+
+        <Suspense fallback={null}>
+
+          <Rig>
+            <Steering />
+          </Rig>
+
+        </Suspense>
+
+      </Canvas>
+
+      <Text>
+        The steering wheel of an F1 Car weighs 3-4 pounds, and this will need to be held and controlled by the driver in a high G turn.
+      </Text>
+
+
+    </div></><div> <Text2>
+    Formula One cars use highly automated semi-automatic sequential gearboxes with paddle-shifters, with regulations stating that 8 forward gears.
+    </Text2></div></>
+  
   );
 }
