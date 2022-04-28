@@ -1,16 +1,29 @@
 import './App.css';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls, CameraShake } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
 import * as THREE from 'three'
 import styled from "styled-components";
+import './App.css';
 
-import Car from './Car'
 import Steering from './Steering'
-import Plane from './Plane';
 
 const Hej = styled.h1`
-  font-size: 100px;
+  font-size: 75px;
+  padding: 50px; 
+  margin: auto;
+  text-align: center;
+  font-weight: 300;
+  color: black;
+  font-family: 'Bebas Neue', cursive;
+`
+
+const Text = styled.p`
+font-size: 20px;
+margin: auto;
+padding: 50px;
+font-weight: 300;
+color: black;
 `
 
 
@@ -27,33 +40,71 @@ function Rig({ children }) {
   return <group ref={ref}>{children}</group>
 }
 
+// Lights
+function KeyLight({ brightness, color }) {
+  return (
+    <rectAreaLight
+      width={10}
+      height={10}
+      color={color}
+      intensity={brightness}
+      position={[0, 0, 0]}
+      lookAt={[0, 0, 0]}
+      penumbra={1}
+      castShadow
+    />
+  );
+}
+function FillLight({ brightness, color }) {
+  return (
+    <rectAreaLight
+      width={10}
+      height={10}
+      intensity={brightness}
+      color={color}
+      position={[0, 0, 0]}
+      lookAt={[0, 0, 0]}
+      penumbra={2}
+      castShadow
+    />
+  );
+}
+
+
 
 export default function App() {
   return (
     <div>
-      <Hej>Possum Fava Lundin</Hej>
+
+
+
+      <Hej>STEERING WHEEL</Hej>
+
+      <Canvas style={{margin: '0 auto', height: "55vh", width: "75vw" }} camera={{fov: 75, near: 0.1, far: 1000, position: [0, 0, 10]}} shadowMap >
+
+      <color attach="background" args={['alpha']} />
+    
+      <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
+
+        <KeyLight brightness={50} color={"#ffc9f9"} /> 
+        <FillLight brightness={50} color={"white"} />
       
-      <Canvas style={{ height: "75vh", width: "100vw" }} camera={{fov: 75, near: 0.1, far: 1000, position: [0, 0, 10]}} shadowMap >
+       <Suspense fallback={null}>
 
-      <color attach="background" args={['white']} />
-      <ambientLight intensity={0.1} />
-      <directionalLight intensity={1} color="white" position={[0, 5, 0]} castShadow shadow-mapSize-height={512} shadow-mapSize-width={512}/>
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-     <Suspense fallback={null}>
        <Rig>
-      <Car castShadow/>
-      <Steering />
-     {/* <Plane /> */}
+         <Steering 
+         metalness={10}
+         />
+       </Rig>
 
-     <mesh position = {[0, -1, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} >
-      <planeGeometry args={[10, 10]} receiveShadow />
-      <meshPhongMaterial color='#47C7FC'  />
-    </mesh>
-
-    </Rig>
      </Suspense>
-     
+    
   </Canvas>
+
+      <Text>
+        Information om ratten, 
+      </Text>
+
   </div>
   );
 }
