@@ -4,13 +4,16 @@ import { OrbitControls } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
 import * as THREE from 'three'
 import styled from "styled-components";
-import './App.css';
 
-import Steering from './Steering'
+import Steering from './Steering';
+import Car from './Car';
 
-const Hej = styled.h1`
+import mainLogo from './logo.png';
+
+const Title = styled.h1`
   font-size: 100px;
-  padding: 50px; 
+  padding: 120px; 
+  margin-top: 200px;
   margin: auto;
   text-align: center;
   font-weight: 300;
@@ -36,6 +39,12 @@ color: black;
 font-family: 'Bebas Neue', cursive;
 `
 
+const ImgStyle = styled.img`
+height: 25%;
+width: 25%;
+padding: 100px;
+`
+
 
 function Rig({ children }) {
   const ref = useRef()
@@ -51,7 +60,7 @@ function Rig({ children }) {
 }
 
 // Lights
-function KeyLight({ brightness, color }) {
+function Steeringlight({ brightness, color }) {
   return (
     <rectAreaLight
       width={10}
@@ -65,14 +74,14 @@ function KeyLight({ brightness, color }) {
     />
   );
 }
-function FillLight({ brightness, color }) {
+function Carlight({ brightness, color }) {
   return (
     <rectAreaLight
-      width={10}
-      height={10}
+      width={5}
+      height={5}
       intensity={brightness}
       color={color}
-      position={[0, 0, 0]}
+      position={[5, 3, 5]}
       lookAt={[0, 0, 0]}
       penumbra={2}
       castShadow
@@ -85,21 +94,36 @@ function FillLight({ brightness, color }) {
 export default function App() {
   return (
 
-  <><><div><Hej>STEERING WHEEL</Hej> </div><div className='rowC'>
+    <><div>
+      <ImgStyle src={mainLogo}/>
+    </div>
+    
+    <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
+
+      <color attach="background" args={['white']} />
+
+      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+
+      <Carlight brightness={50} color={"white"} />
+
+      <Suspense fallback={null}>
+
+        <Rig>
+          <Car />
+        </Rig>
+
+      </Suspense>
+
+    </Canvas><><><div><Title>STEERING WHEEL</Title> </div><div className='rowC'>
 
       <Text>
         A F1 steering wheel can cost about $40,000 to $100,000. However, it could be more than $100,000 million depending on the level of sophistication.
       </Text>
 
       <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
-
         <color attach="background" args={['white']} />
-
         <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
-
-        <KeyLight brightness={50} color={"white"} />
-        <FillLight brightness={50} color={"white"} />
-
+        <Steeringlight brightness={30} color={"white"} />
         <Suspense fallback={null}>
 
           <Rig>
@@ -107,7 +131,6 @@ export default function App() {
           </Rig>
 
         </Suspense>
-
       </Canvas>
 
       <Text>
@@ -116,8 +139,8 @@ export default function App() {
 
 
     </div></><div> <Text2>
-    Formula One cars use highly automated semi-automatic sequential gearboxes with paddle-shifters, with regulations stating that 8 forward gears.
-    </Text2></div></>
+      Formula One cars use highly automated semi-automatic sequential gearboxes with paddle-shifters, with regulations stating that 8 forward gears.
+    </Text2></div></></>
   
   );
 }
