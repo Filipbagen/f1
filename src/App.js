@@ -1,9 +1,11 @@
 import './App.css';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { Suspense, useRef } from 'react';
+import { OrbitControls, Stars } from '@react-three/drei';
+import { Suspense, useRef, useState} from 'react';
 import * as THREE from 'three'
 import styled from "styled-components";
+
+import { Preload, useCursor } from '@react-three/drei'
 
 import Steering from './Steering';
 import Car from './Car';
@@ -12,7 +14,7 @@ import mainLogo from './logo.png';
 
 const Title = styled.h1`
   font-size: 100px;
-  padding: 120px; 
+  padding: 300px; 
   margin-top: 200px;
   margin: auto;
   text-align: center;
@@ -89,6 +91,23 @@ function Carlight({ brightness, color }) {
   );
 }
 
+function ChangeModel() {
+  const vec = new THREE.Vector3()
+  const [clicked, setClicked] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  useCursor(hovered)
+  useFrame((state) => {
+    state.camera.position.lerp(vec.set(clicked ? -10 : 0, clicked ? 10 : 0, 20), 0.1)
+    state.camera.lookAt(0, 0, 0)
+  })
+  return (
+    <group>
+      <Steering visible={clicked} />
+      <Car visible={!clicked} onClick={() => setClicked(true)} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} />
+    </group>
+  )
+}
+
 
 
 export default function App() {
@@ -97,23 +116,33 @@ export default function App() {
     <><div>
       <ImgStyle src={mainLogo}/>
     </div>
+
+    {/* Klickar man på den första bilen byter man model till ratten, kul grej. */}
+    <Canvas dpr={[1, 2]} style={{ margin: '0 auto', height: "55vh", width: "75vw" }}  orthographic camera={{ zoom: 100 }}>
+    <Carlight brightness={50} color={"white"} />
+      <Suspense fallback={null}>
+        <ChangeModel />
+        <Preload all />
+      </Suspense>
+    </Canvas>
     
+    {/* Andra bilen */}
     <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
 
       <color attach="background" args={['white']} />
 
       <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-
       <Carlight brightness={50} color={"white"} />
 
       <Suspense fallback={null}>
-
         <Rig>
           <Car />
         </Rig>
 
       </Suspense>
 
+
+    {/* Steering wheel segment */}
     </Canvas><><><div><Title>STEERING WHEEL</Title> </div><div className='rowC'>
 
       <Text>
@@ -121,7 +150,8 @@ export default function App() {
       </Text>
 
       <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
-        <color attach="background" args={['white']} />
+         <color attach="background" args={['white']} />
+  
         <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
         <Steeringlight brightness={30} color={"white"} />
         <Suspense fallback={null}>
