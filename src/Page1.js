@@ -1,6 +1,6 @@
 import React from "react"
 import './App.css';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, Float, BakeShadows, ContactShadows, OrbitControls, Stars} from '@react-three/drei';
 import { LayerMaterial, Color, Depth } from 'lamina'
 import { Suspense, useRef} from 'react';
@@ -19,14 +19,19 @@ export default function Page1() {
         <div>
             <ImgStyle src={mainLogo}/>
 
+            <h1 style={{position: 'absolute', fontSize: '164px', top: '150px', left: '300px',color: 'blue'}}>
+                Hello
+            </h1>
+
             <Canvas style={{ margin: '0 auto', height: "50vh", width: "100vw" }} shadows dpr={[1, 2]} camera={{ position: [-10, 0, 15], fov: 30 }}>
             <spotLight position={[0, 20, 30]} angle={0.3} penumbra={1} castShadow intensity={5} shadow-bias={-0.0001} />
             <ambientLight intensity={0.2} />
             <ContactShadows resolution={1024} frames={1} position={[0, -1.16, 0]} scale={10} blur={3} opacity={1} far={10} />
-
+            <Stars /> 
             <Suspense fallback={null}>
             <Car/> 
 
+            <OrbitControls />
 
             {/* Renders contents "live" into a HDRI environment (scene.environment). */}
             <Environment frames={Infinity} resolution={256}>
@@ -74,10 +79,10 @@ function MovingSpots({ positions = [2, 0, 2, 0, 2, 0, 2, 0] }) {
     )
   }
   
-  function CameraRig({ v = new THREE.Vector3() }) {
-    return useFrame((state) => {
-      const t = state.clock.elapsedTime
-      state.camera.position.lerp(v.set(Math.sin(t / 2), 0, 1.9*10 + Math.cos(t / 2)), 0.005)
-      state.camera.lookAt(0, 0, 0)
+function CameraRig({ v = new THREE.Vector3() }) {
+return useFrame((state) => {
+    const t = state.clock.elapsedTime
+    state.camera.position.lerp(v.set(Math.sin(t / 2), 0, 1.9*10 + Math.cos(t / 2)), 0.005)
+    state.camera.lookAt(0, 0, 0)
     })
-  }
+}
