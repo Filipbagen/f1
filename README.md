@@ -35,3 +35,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## install react-three/fiber
 ## install react-three/drei
+## install styled-components
