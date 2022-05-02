@@ -14,9 +14,6 @@ export default function Model(props) {
     position={[0, -5, -7]} 
     rotation={[-0.4, 0, 0]}
     scale={4}
-
-    
-    
     >
       <mesh
         castShadow

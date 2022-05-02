@@ -7,9 +7,9 @@ export default function Model(props) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group
-        position={[-0.02, -0.46, 0.09]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={0.8}
+       position={[0.3, -2, 0.09]}
+       rotation={[Math.PI /2, 0, Math.PI/4]}
+        scale={2.1}
       >
         <mesh
           castShadow

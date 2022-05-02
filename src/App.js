@@ -1,52 +1,14 @@
 import './App.css';
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
-import { Suspense, useRef, useState} from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
+import { useRef, useState} from 'react';
 import * as THREE from 'three'
 import styled from "styled-components";
+import Page1 from './Page1';
 
 import { Preload, useCursor } from '@react-three/drei'
 
 import Steering from './Steering';
 import Car from './Car';
-
-import mainLogo from './logo.png';
-
-const Title = styled.h1`
-  font-size: 100px;
-  padding: 300px; 
-  margin-top: 200px;
-  margin: auto;
-  text-align: center;
-  font-weight: 300;
-  color: black;
-  font-family: 'Bebas Neue', cursive;
-`
-
-const Text = styled.p`
-font-size: 18px;
-margin: auto;
-padding: 50px;
-font-weight: 10;
-color: black;
-font-family: 'Bebas Neue', cursive;
-`
-
-const Text2 = styled.p`
-font-size: 18px;
-margin: auto;
-padding: 80px;
-font-weight: 10;
-color: black;
-font-family: 'Bebas Neue', cursive;
-`
-
-const ImgStyle = styled.img`
-height: 25%;
-width: 25%;
-padding: 100px;
-`
-
 
 function Rig({ children }) {
   const ref = useRef()
@@ -76,20 +38,6 @@ function Steeringlight({ brightness, color }) {
     />
   );
 }
-function Carlight({ brightness, color }) {
-  return (
-    <rectAreaLight
-      width={5}
-      height={5}
-      intensity={brightness}
-      color={color}
-      position={[5, 3, 5]}
-      lookAt={[0, 0, 0]}
-      penumbra={2}
-      castShadow
-    />
-  );
-}
 
 function ChangeModel() {
   const vec = new THREE.Vector3()
@@ -112,65 +60,40 @@ function ChangeModel() {
 
 export default function App() {
   return (
-
-    <><div>
-      <ImgStyle src={mainLogo}/>
-    </div>
-
-    {/* Klickar man på den första bilen byter man model till ratten, kul grej. */}
-    <Canvas dpr={[1, 2]} style={{ margin: '0 auto', height: "55vh", width: "75vw" }}  orthographic camera={{ zoom: 100 }}>
-    <Carlight brightness={50} color={"white"} />
-      <Suspense fallback={null}>
-        <ChangeModel />
-        <Preload all />
-      </Suspense>
-    </Canvas>
-    
-    {/* Andra bilen */}
-    <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
-
-      <color attach="background" args={['white']} />
-
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-      <Carlight brightness={50} color={"white"} />
-
-      <Suspense fallback={null}>
-        <Rig>
-          <Car />
-        </Rig>
-
-      </Suspense>
+    <Page1 />
+  ); 
+}
 
 
     {/* Steering wheel segment */}
-    </Canvas><><><div><Title>STEERING WHEEL</Title> </div><div className='rowC'>
+//     {/* </Canvas><><><div><Title>STEERING WHEEL</Title> </div><div className='rowC'>
 
-      <Text>
-        A F1 steering wheel can cost about $40,000 to $100,000. However, it could be more than $100,000 million depending on the level of sophistication.
-      </Text>
+//       <Text>
+//         A F1 steering wheel can cost about $40,000 to $100,000. However, it could be more than $100,000 million depending on the level of sophistication.
+//       </Text>
 
-      <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
-         <color attach="background" args={['white']} />
+//       <Canvas style={{ margin: '0 auto', height: "55vh", width: "75vw" }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 10] }} shadowMap>
+//          <color attach="background" args={['white']} />
   
-        <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
-        <Steeringlight brightness={30} color={"white"} />
-        <Suspense fallback={null}>
+//         <OrbitControls enableZoom={true} enablePan={false} enableRotate={false} />
+//         <Steeringlight brightness={30} color={"white"} />
+//         <Suspense fallback={null}>
 
-          <Rig>
-            <Steering />
-          </Rig>
+//           <Rig>
+//             <Steering />
+//           </Rig>
 
-        </Suspense>
-      </Canvas>
+//         </Suspense>
+//       </Canvas>
 
-      <Text>
-        The steering wheel of an F1 Car weighs 3-4 pounds, and this will need to be held and controlled by the driver in a high G turn.
-      </Text>
+//       <Text>
+//         The steering wheel of an F1 Car weighs 3-4 pounds, and this will need to be held and controlled by the driver in a high G turn.
+//       </Text>
 
 
-    </div></><div> <Text2>
-      Formula One cars use highly automated semi-automatic sequential gearboxes with paddle-shifters, with regulations stating that 8 forward gears.
-    </Text2></div></></>
+//     </div></><div> <Text2>
+//       Formula One cars use highly automated semi-automatic sequential gearboxes with paddle-shifters, with regulations stating that 8 forward gears.
+//     </Text2></div></></>
   
-  );
-}
+//   );
+// } */}
