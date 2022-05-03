@@ -1,5 +1,5 @@
-import React from "react";
-import { Canvas, useFrame } from '@react-three/fiber';
+import React from "react"
+import { Canvas, useFrame } from '@react-three/fiber'
 import { ScrollControls, Scroll } from '@react-three/drei'
 import Steering from './Steering.js'
 import Car from './Car.js'
