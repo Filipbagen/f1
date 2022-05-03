@@ -7,8 +7,8 @@ export default function Model(props) {
   const { nodes, materials } = useGLTF(path);
   return (
     <group ref={group} {...props} dispose={null}
-    position={[-1, -5, 0]}
-       rotation={[0.1, 0.5, 0]}
+    position={[-1, -5, -3]}
+       rotation={[-0.1, 0.7, 0]}
         scale={0.9}
       >
       <mesh
