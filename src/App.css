@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 body {
-    background-color: #15354A;
+    /* background-color: #15354A; */
+    /* background-color: white; */
+    background-image: linear-gradient(red, yellow);
     margin: 0;
     overflow: hidden;
 }

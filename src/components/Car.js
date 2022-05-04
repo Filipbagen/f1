@@ -11,7 +11,7 @@ export default function Model(props) {
   const { nodes, materials } = useLoader(GLTFLoader, path);
   return (
     <group ref={group} {...props} dispose={null}
-    position={[-1, -6, -3]}
+    position={[-1, -5.8, -3]}
        rotation={[-0.07, 0.7, 0]}
         scale={0.9}
       >
