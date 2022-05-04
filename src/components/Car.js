@@ -1,26 +1,30 @@
 import React, { useRef } from "react"
 import { useGLTF } from "@react-three/drei"
-import path from '../glb/F1CAR.glb'
+import path from '../glb/F1Nosub.glb'
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+
 
 export default function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF(path);
+  const { nodes, materials } = useLoader(GLTFLoader, path);
   return (
     <group ref={group} {...props} dispose={null}
-    position={[-1, -5, -3]}
-       rotation={[-0.1, 0.7, 0]}
+    position={[-1, -6, -3]}
+       rotation={[-0.07, 0.7, 0]}
         scale={0.9}
       >
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Cube.geometry}
-        material={nodes.Cube.material}
-        position={[0, 0.26, 2.11]}
+        material={materials.Material}
+        position={[0.13, 1.23, 1.81]}
         scale={[0.09, 0.14, 0.48]}
       />
       <group
-        position={[1.19, -0.11, -2.47]}
+        position={[1.32, 0.86, -2.78]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={[1.72, 1.72, 1.72]}
       >
@@ -60,7 +64,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes["Mutter-Bak"].geometry}
         material={materials["Material.044"]}
-        position={[1.36, -0.11, -2.5]}
+        position={[1.49, 0.86, -2.81]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.72}
       />
@@ -69,7 +73,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.Mclaren_märke_däck_upp.geometry}
         material={nodes.Mclaren_märke_däck_upp.material}
-        position={[1.45, 0.14, -2.5]}
+        position={[1.57, 1.11, -2.8]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.72}
       />
@@ -78,12 +82,12 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.Mclaren_märke_däckk_ner.geometry}
         material={nodes.Mclaren_märke_däckk_ner.material}
-        position={[1.45, -0.36, -2.5]}
+        position={[1.57, 0.62, -2.81]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.72}
       />
       <group
-        position={[1.17, -0.13, 2.51]}
+        position={[1.29, 0.85, 2.2]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.61}
       >
@@ -123,7 +127,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.Mutter_Fram.geometry}
         material={materials["Material.051"]}
-        position={[1.3, -0.13, 2.51]}
+        position={[1.42, 0.85, 2.21]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.61}
       />
@@ -132,7 +136,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes["Mclaren_märke_fram-däck_upp"].geometry}
         material={nodes["Mclaren_märke_fram-däck_upp"].material}
-        position={[1.38, 0.1, 2.52]}
+        position={[1.5, 1.08, 2.21]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.61}
       />
@@ -141,7 +145,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes["Mclaren_märke_fram-däck_ner"].geometry}
         material={nodes["Mclaren_märke_fram-däck_ner"].material}
-        position={[1.38, -0.36, 2.51]}
+        position={[1.5, 0.62, 2.2]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.61}
       />

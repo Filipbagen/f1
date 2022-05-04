@@ -2,10 +2,12 @@ import React, { useRef } from "react";
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from "@react-three/drei";
 import path from '../glb/logga3d.glb'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { useLoader } from "@react-three/fiber";
 
 export default function Model(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF(path);
+  const { nodes, materials } = useLoader(GLTFLoader, path);
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     // 0.3 - (1 + Math.sin(t / 4)) / 8
