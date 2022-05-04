@@ -6,11 +6,17 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import path from '../glb/steeringwheel899.glb'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
+import * as THREE from 'three';
 
 export default function Model(props) {
   const group = useRef();
   const { nodes, materials } = useLoader(GLTFLoader, path);
+
+  useFrame((state, delta) => {
+    // group.current.rotation.y = THREE.MathUtils.degToRad((props.scroll.current * 360) / 1)
+  })
+
   return (
     <group ref={group} {...props} dispose={null}
     
