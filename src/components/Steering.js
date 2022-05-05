@@ -20,7 +20,7 @@ export default function Model(props) {
   return (
     <group ref={group} {...props} dispose={null}
     
-    position={[0, -18, -7]} 
+    position={[0, -18, -12]} 
     rotation={[0, 0.3, 0]}
     scale={3}
     >

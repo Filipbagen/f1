@@ -44,11 +44,39 @@ export default function LandingPage() {
                     <Scroll>
                         <Suspense fallback={null}>
                             
-                            <mesh castShadows position={[0, -4.85, -5]} rotation={[Math.PI / 2, 0, Math.PI / 2]} scale={[10, 10, 0.1]} 
+                            {/* Golv */}
+                            <mesh castShadows position={[0, -4.85, -8]} rotation={[Math.PI / 2, 0, Math.PI / 2]} scale={[20, 50, 0.1]} 
                             receiveShadow >
                                 <boxBufferGeometry />
                                 <meshPhongMaterial reflectivity={100} shininess={0} color={"black"} />
                             </mesh>
+
+                            {/* Golv */}
+                            <mesh castShadows position={[0, -25, -8]} rotation={[Math.PI / 2, 0, Math.PI / 2]} scale={[20, 50, 0.1]} 
+                            receiveShadow >
+                                <boxBufferGeometry />
+                                <meshPhongMaterial reflectivity={100} shininess={0} color={"black"} />
+                            </mesh>
+
+                            {/* Backwall */}
+                            <mesh castShadows position={[0, -4.85, -15]} rotation={[0, 0, Math.PI / 2]} scale={[40, 80, 0.1]} 
+                            receiveShadow >
+                                <boxBufferGeometry />
+                                <meshPhongMaterial reflectivity={100} shininess={0} color={"grey"} />
+                            </mesh>
+
+                            <mesh castShadows position={[-15, -4.85, 0]} rotation={[0, Math.PI / 2, 0]} scale={[40, 80, 0.1]} 
+                            receiveShadow >
+                                <boxBufferGeometry />
+                                <meshPhongMaterial reflectivity={100} shininess={0} color={"white"} />
+                            </mesh>
+
+                            <mesh castShadows position={[15, -4.85, 0]} rotation={[0, Math.PI / 2, 0]} scale={[40, 80, 0.1]} 
+                            receiveShadow >
+                                <boxBufferGeometry />
+                                <meshPhongMaterial reflectivity={100} shininess={0} color={"white"} />
+                            </mesh>
+
                             {/* <OrbitControls/>  */}
                             <Steering />
                            
